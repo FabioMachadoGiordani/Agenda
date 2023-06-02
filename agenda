@@ -1,0 +1,64 @@
+// Carregar contatos existentes ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+  loadContacts();
+});
+
+// Adicionar evento de submit ao formulário
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Impedir o envio do formulário
+
+  // Obter os valores dos campos
+  var name = document.getElementById('nameInput').value;
+  var phone = document.getElementById('phoneInput').value;
+  var email = document.getElementById('emailInput').value;
+
+  // Criar um objeto de contato
+  var contact = {
+    name: name,
+    phone: phone,
+    email: email
+  };
+
+  // Adicionar o contato à lista
+  addContact(contact);
+
+  // Limpar os campos do formulário
+  document.getElementById('nameInput').value = '';
+  document.getElementById('phoneInput').value = '';
+  document.getElementById('emailInput').value = '';
+});
+
+// Função para adicionar um contato à lista
+function addContact(contact) {
+  // Obter a lista de contatos do localStorage
+  var contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+
+  // Adicionar o novo contato à lista
+  contacts.push(contact);
+
+  // Armazenar a lista atualizada no localStorage
+  localStorage.setItem('contacts', JSON.stringify(contacts));
+
+  // Carregar a lista de contatos novamente
+  loadContacts();
+}
+
+// Função para carregar os contatos existentes
+function loadContacts() {
+  // Obter a lista de contatos do localStorage
+  var contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+
+  // Limpar a lista de contatos
+  document.getElementById('contactList').innerHTML = '';
+
+  // Adicionar cada contato à lista
+  contacts.forEach(function(contact) {
+    var contactItem = document.createElement('div');
+    contactItem.classList.add('contact-item');
+    contactItem.innerHTML = '<strong>Nome:</strong> ' + contact.name + '<br>' +
+                            'Telefone:</strong> ' + contact.phone + '<br>' +
+                            '<strong>E-mail:</strong> ' + contact.email;
+
+    document.getElementById('contactList').appendChild(contactItem);
+  });
+}

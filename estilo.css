@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form input,
+  form button {
+    margin-top: 10px;
+    display: block;
+  }
+  
+  form button {
+    margin-top: 20px;
+  }
+  
+  #contactList {
+    margin-top: 20px;
+  }
+  
+  .contact-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
